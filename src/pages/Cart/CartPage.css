@@ -1,0 +1,195 @@
+.cart-page {
+  background: #eaeded;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.cart-content {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 20px;
+  max-width: 1400px;
+  margin: auto;
+}
+
+.cart-items {
+  background: white;
+  padding: 20px;
+}
+
+.cart-items h2 {
+  margin-bottom: 20px;
+  font-size: 28px;
+}
+
+.cart-card {
+  display: grid;
+  grid-template-columns: 180px 1fr auto;
+  gap: 20px;
+  align-items: center;
+}
+.cart-img {
+  width: 180px;
+  height: 180px;
+  object-fit: contain;
+}
+
+.cart-details {
+  flex: 1;
+}
+
+.cart-details h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.stock {
+  color: green;
+  margin-bottom: 15px;
+}
+
+.qty {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.qty button {
+  width: 35px;
+  height: 35px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.remove-btn {
+  margin-top: 15px;
+  background: none;
+  border: none;
+  color: #007185;
+  cursor: pointer;
+}
+
+.remove-btn:hover {
+  text-decoration: underline;
+}
+
+.cart-price {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.cart-summary {
+  background: white;
+  padding: 20px;
+  height: fit-content;
+  border-radius: 8px;
+}
+
+.cart-summary h3 {
+  margin-bottom: 10px;
+}
+
+.cart-summary h2 {
+  margin-bottom: 20px;
+}
+
+.checkout-btn {
+  width: 100%;
+  background: #ffd814;
+  border: none;
+  padding: 12px;
+  border-radius: 30px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.checkout-btn:hover {
+  background: #f7ca00;
+}
+/* =========================
+   Tablet
+========================= */
+@media (max-width: 992px) {
+  .cart-content {
+    grid-template-columns: 1fr;
+  }
+
+  .cart-summary {
+    order: -1;
+  }
+}
+
+/* =========================
+   Mobile
+========================= */
+@media (max-width: 768px) {
+  .cart-page {
+    padding: 10px;
+  }
+
+  .cart-items {
+    padding: 15px;
+  }
+
+  .cart-items h2 {
+    font-size: 22px;
+  }
+
+  .cart-card {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .cart-img {
+    width: 140px;
+    height: 140px;
+  }
+
+  .cart-details {
+    width: 100%;
+  }
+
+  .cart-price {
+    font-size: 20px;
+    margin-top: 10px;
+  }
+
+  .qty {
+    justify-content: center;
+  }
+}
+
+/* =========================
+   Small Mobile
+========================= */
+@media (max-width: 480px) {
+  .cart-img {
+    width: 110px;
+    height: 110px;
+  }
+
+  .cart-details h3 {
+    font-size: 16px;
+  }
+
+  .cart-price {
+    font-size: 18px;
+  }
+
+  .checkout-btn {
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  .qty button {
+    width: 30px;
+    height: 30px;
+  }
+}
+@media (max-width: 768px) {
+  .cart-card {
+    grid-template-columns: 1fr;
+  }
+}
