@@ -1,49 +1,92 @@
-// import React from "react";
-import { IoMenu } from "react-icons/io5"; // أيقونة أقرب للتصميم
-import { Link } from "react-router-dom";
-import "./Header.css";
-import { useEffect, useState } from "react";
+import { IoMenu } from "react-icons/io5";
+import { IoChevronDown } from "react-icons/io5";
+import { Link, NavLink } from "react-router-dom";
+import { useEffect, useState, useRef } from "react";
+import "./BottomHeader.css";
 
-const NavLinks = [
+const NAV_LINKS = [
   { title: "Home", path: "/" },
   { title: "Shop", path: "/shop" },
   { title: "Deals", path: "/deals" },
   { title: "New Arrivals", path: "/new-arrivals" },
   { title: "Brands", path: "/brands" },
+  { title: "Contact", path: "contact" },
 ];
+
 function BottomHeader() {
   const [categories, setCategories] = useState([]);
   const [open, setOpen] = useState(false);
+  const dropdownRef = useRef(null);
+
   useEffect(() => {
     fetch("https://dummyjson.com/products/categories")
       .then((res) => res.json())
       .then((data) => setCategories(data))
-      .catch((err) => console.log(err));
+      .catch((err) => console.error(err));
   }, []);
+
+  /* Close dropdown when clicking outside */
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+        setOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
   return (
-    <div className="header-container">
-      {/* زر الـ Categories */}
-      <div className="categories-btn"
-       onClick={() => setOpen(!open)}>
-        <IoMenu className="iconCategories" />
-        <span>Categories</span>
+    <div className="bottom-header">
+      {/* Categories button + dropdown */}
+      <div className="categories-wrapper" ref={dropdownRef}>
+        <button
+          className="categories-btn"
+          onClick={() => setOpen((prev) => !prev)}
+          aria-expanded={open}
+          aria-haspopup="true"
+        >
+          <IoMenu className="cat-menu-icon" />
+          <span className="cat-label">Categories</span>
+          <IoChevronDown
+            className={`cat-chevron ${open ? "cat-chevron--open" : ""}`}
+          />
+        </button>
+
         {open && (
-          <div className="category_nav_list">
+          <ul className="category-dropdown" role="menu">
             {categories.map((category, index) => (
-              <Link key={index} to={`/category/${category.slug}`}>
-                {category.name}
-              </Link>
+              <li key={index} role="none">
+                <Link
+                  to={`/category/${category.slug}`}
+                  role="menuitem"
+                  onClick={() => setOpen(false)}
+                >
+                  {category.name}
+                </Link>
+              </li>
             ))}
-          </div>
+          </ul>
         )}
       </div>
-      {/* الروابط */}
-      {/* الروابط - تم استخدام المصفوفة هنا */}
-      <nav className="navbar">
-        <ul className="nav-links">
-          {NavLinks.map((link) => (
+
+      {/* Divider */}
+      <div className="header-divider" aria-hidden="true" />
+
+      {/* Nav links */}
+      <nav className="bottom-nav" aria-label="Main navigation">
+        <ul className="nav-list">
+          {NAV_LINKS.map((link) => (
             <li key={link.title}>
-              <Link to={link.path}>{link.title}</Link>
+              <NavLink
+                to={link.path}
+                className={({ isActive }) =>
+                  `nav-link ${isActive ? "nav-link--active" : ""}`
+                }
+                end={link.path === "/"}
+              >
+                {link.title}
+              </NavLink>
             </li>
           ))}
         </ul>

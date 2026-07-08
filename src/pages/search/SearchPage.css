@@ -1,0 +1,32 @@
+.search-page {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+  background: #eaeded;
+  min-height: 100vh;
+}
+
+.search-sidebar {
+  width: 250px;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  height: fit-content;
+}
+
+.search-main {
+  flex: 1;
+}
+
+.search-header {
+  background: white;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
